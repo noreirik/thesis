@@ -1,8 +1,0 @@
-/**
- * 
- */
-/**
- * @author eirik
- *
- */
-package entityrecognition;
