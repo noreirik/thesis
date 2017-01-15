@@ -28,7 +28,7 @@ public class Entity {
 		String name = getFullName();
 		String firstName = getFirstName();
 		String lastName = getLastName();
-		String jobTitle = getLastName();
+		String jobTitle = getJobTitle();
 		
 		if (verify(id)) sb.append(id+":");
 		else sb.append("NULL:");
