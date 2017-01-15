@@ -6,12 +6,9 @@ import java.util.List;
 
 import com.opencsv.CSVReader;
 
-/*
- *  TODO: Find a way to skip lines before header line. Right now header line is manually set to the first line
- */
-public class CSVParser {
+public class ERCSVReader {
 
-	public List<String[]> parse(String filename) {
+	public List<String[]> read(String filename) {
 
 		List<String[]> records = new ArrayList<String[]>();
 		// tab is delimiter, double quotes as quote
