@@ -3,18 +3,21 @@ import java.util.List;
 
 public class ProbabilisticEntityResolver implements EntityResolver {
 	
-	// TODO: Actual matching
+	// 
 	private boolean match(Entity x, Entity y) {
 		if (x == null) return x == y;
 		if (y == null) return false;
 		
-		boolean returnValue =
-				!x.getId().isEmpty() &&
-				x.getId().toLowerCase().equals(y.getId().toLowerCase());
-		if (!x.getFullName().isEmpty() && !y.getFullName().isEmpty())
-			returnValue = returnValue && x.getFullName().toLowerCase().equals(y.getFullName());
-		return returnValue;
+		boolean sharesId =			!x.getId().isEmpty() &&
+									x.getId().toLowerCase().equals(y.getId().toLowerCase()); 
+		boolean sharesFullName =	!x.getFullName().isEmpty() &&
+									x.getFullName().toLowerCase().equals(y.getFullName().toLowerCase());
+		boolean sharesFirstName =	!x.getFirstName().isEmpty() &&
+									x.getFirstName().toLowerCase().equals(y.getFirstName().toLowerCase());
+		boolean sharesLastName =	!x.getLastName().isEmpty() &&
+									x.getLastName().toLowerCase().equals(y.getLastName().toLowerCase());
 		
+		return sharesId || sharesFullName || (sharesFirstName && sharesLastName);
 	}
 	
 	// TODO: Actual merging
