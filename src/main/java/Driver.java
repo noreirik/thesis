@@ -1,5 +1,7 @@
 import java.io.File;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public class Driver {
@@ -22,12 +24,14 @@ public class Driver {
 		EntityResolver resolver = new ProbabilisticEntityResolver();
 		List<Entity> resolvedEntities = resolver.resolve(entities);
 		
-		System.exit(0);
-	}
-	
-	private static void printRecords(List<Entity> l) {
-		for (int i = 0; i < l.size(); i++) {
-			System.out.println(l.get(i));
+		// dump results to file
+		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
+		EntityWriter writer = new PersonEntityWriter(String.format("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/entities-PERSON-%s.lbat", timeStamp));
+		writer.open();
+		for (Entity e : resolvedEntities) {
+			writer.write(e);
 		}
+		writer.close();
+		System.exit(0);
 	}
 }
