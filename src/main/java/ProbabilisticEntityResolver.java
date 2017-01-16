@@ -16,8 +16,19 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 									x.getFirstName().toLowerCase().equals(y.getFirstName().toLowerCase());
 		boolean sharesLastName =	!x.getLastName().isEmpty() &&
 									x.getLastName().toLowerCase().equals(y.getLastName().toLowerCase());
+		// if both first and last name field of Y can be found in full name of X
+		boolean firstNameAndLastNameInFullNameInX =
+									!x.getFullName().isEmpty() && !y.getFirstName().isEmpty() && !y.getLastName().isEmpty() &&
+									x.getFullName().toLowerCase().contains(y.getFirstName().toLowerCase()) &&
+									x.getFullName().toLowerCase().contains(y.getLastName().toLowerCase());
+		// if both first and last name field of X can be found in full name of Y
+		boolean firstNameAndLastNameInFullNameInY =
+									!y.getFullName().isEmpty() && !x.getFirstName().isEmpty() && !x.getLastName().isEmpty() &&
+									y.getFullName().toLowerCase().contains(x.getFirstName().toLowerCase()) &&
+									y.getFullName().toLowerCase().contains(x.getLastName().toLowerCase());
 		
-		return sharesId || sharesFullName || (sharesFirstName && sharesLastName);
+		return	sharesId || sharesFullName || (sharesFirstName && sharesLastName) ||
+				firstNameAndLastNameInFullNameInX || firstNameAndLastNameInFullNameInY;
 	}
 	
 	// abc, afd -> abc afd
@@ -29,7 +40,8 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 			sb.append(s1);
 		}
 		if (!s2.isEmpty() && !s2.equalsIgnoreCase(s1)) {
-			sb.append(s2); 
+			if (sb.toString().isEmpty()) sb.append(" ");
+			sb.append(s2);
 		}
 		return sb.toString();
 	}
