@@ -20,9 +20,43 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 		return sharesId || sharesFullName || (sharesFirstName && sharesLastName);
 	}
 	
-	// TODO: Actual merging
+	// abc -> abc, abc def -> "abc def"
+	private String quote(String s) {
+		if (s.contains(" ") && !s.contains("\"")) return String.format("\"%s\"", s);
+		else return s;
+	}
+	
+	// abc, afd -> abc afd
+	// abc, afd eee -> abc "afd eee"
+	private String mergeStrings(String s1, String s2) {
+		StringBuilder sb = new StringBuilder();
+		
+		if (!s1.isEmpty()) {
+			sb.append(quote(s1));
+		}
+		if (!s2.isEmpty() && !s2.equalsIgnoreCase(s1)) {
+			sb.append(quote(s2)); 
+		}
+		return sb.toString();
+	}
+	
 	private Entity merge(Entity x, Entity y) {
-		return x;
+		
+		EntityBuilder z = new EntityBuilder();
+		
+		if (!x.getId().isEmpty()) z.id(x.getId());
+		else if (!y.getId().isEmpty()) z.id(y.getId());
+		
+		if (!x.getFullName().isEmpty()) z.fullName(x.getFullName());
+		else if (!y.getFullName().isEmpty()) z.fullName(y.getFullName());
+		
+		if (!x.getJobTitle().isEmpty()) z.jobTitle(x.getJobTitle());
+		else if (!y.getJobTitle().isEmpty()) z.jobTitle(y.getJobTitle());
+		
+		z.firstName	( mergeStrings(	x.getFirstName(),	y.getFirstName	()	));
+		z.lastName	( mergeStrings(	x.getLastName(),	y.getLastName	()	));
+
+		return z.build();
 	}
 	
 	private List<Entity> RSwoosh(List<Entity> d2) {
