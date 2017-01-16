@@ -32,8 +32,8 @@ public class PersonEntityWriter extends EntityWriter {
 			s = String.format("create entity PERSON PERSON_NAME %s\n", entity.getFullName());
 			defined = false;
 		}
-		if (defined) this.output.add(s);
-		else this.output.add(0, s);
+		
+		this.output.add(s);
 	}
 	
 	@Override
