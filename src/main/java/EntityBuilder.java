@@ -24,19 +24,12 @@ public class EntityBuilder {
 		return this;
 	}
 	public Entity build() { 
-		Entity e = new Entity();
-
 		if (id == null) 		id = "";
 		if (fullName == null)	fullName = "";
 		if (firstName == null)	firstName = "";
 		if (lastName == null)	lastName = "";
 		if (jobTitle == null)	jobTitle = "";
 		
-		e.setFirstName(firstName);
-		e.setFullName(fullName);
-		e.setLastName(lastName);
-		e.setId(id);
-		e.setJobTitle(jobTitle);
-		return e;
+		return new Entity(id, fullName, firstName, lastName, jobTitle);
 	}
 }

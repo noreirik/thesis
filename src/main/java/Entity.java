@@ -6,7 +6,15 @@ public class Entity {
 	private String id;
 	private String jobTitle;
 	
-	public Entity() { }
+	public Entity(	String id, String fullName, String firstName,
+					String lastName, String jobTitle)
+	{
+		this.id = id;
+		this.fullName = fullName;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.jobTitle = jobTitle;
+	}
 	
 	public void setFullName(String fullName)	{ this.fullName = fullName; 	}
 	public void setFirstName(String firstName)	{ this.firstName = firstName;	}
@@ -46,5 +54,5 @@ public class Entity {
 	
 	public boolean verify(String s) {
 		return !(s.isEmpty() || s == null);
-	}
+	}	
 }

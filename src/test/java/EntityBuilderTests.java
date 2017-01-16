@@ -4,12 +4,8 @@ public class EntityBuilderTests {
 
 	@Test
 	public void EntityBuilderSimpleTest() {
-		Entity entity1 = new Entity();
-		entity1.setFirstName("eirik");
-		entity1.setLastName("norheim");
-		entity1.setFullName("eirik norheim");
-		entity1.setId("abc1234");
-		entity1.setJobTitle("programmer");
+		Entity entity1 = new Entity	("abc1234", "eirik norheim",
+									"eirik", "norheim", "programmer");
 		Entity entity2 = new EntityBuilder()
 							.firstName("eirik")
 							.lastName("norheim")
