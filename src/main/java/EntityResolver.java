@@ -2,11 +2,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EntityResolver {
-
+	
 	private boolean match(Entity x, Entity y) {
 		if (x == null) return x == y;
 		if (y == null) return false;
-		return x.getId().toLowerCase().equals(y.getId().toLowerCase());
+		
+		boolean returnValue =
+				!x.getId().isEmpty() &&
+				x.getId().toLowerCase().equals(y.getId().toLowerCase());
+		if (!x.getFullName().isEmpty() && !y.getFullName().isEmpty())
+			returnValue = returnValue && x.getFullName().toLowerCase().equals(y.getFullName());
+		return returnValue;
+		
 	}
 	
 	// TODO: Actual merging
