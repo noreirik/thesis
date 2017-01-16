@@ -1,28 +1,35 @@
 public class EntityBuilder {
 	
-	private Entity entity;
-	public EntityBuilder() {
-		entity = new Entity();
-	}
+	private String fullName, firstName, lastName, id, jobTitle;
+	
+	public EntityBuilder() { }
 	public EntityBuilder fullName(String fullName)	{ 
-		this.entity.setFullName(fullName);
+		this.fullName = fullName;
 		return this;
 	}
 	public EntityBuilder firstName(String firstName) {
-		this.entity.setFirstName(firstName);
+		this.firstName = firstName;
 		return this;
 	}
 	public EntityBuilder lastName(String lastName) {
-		this.entity.setLastName(lastName);
+		this.lastName = lastName;
 		return this;
 	}
 	public EntityBuilder id(String id) {
-		this.entity.setId(id);
+		this.id = id;
 		return this;
 	}
 	public EntityBuilder jobTitle(String jobTitle) {
-		this.entity.setJobTitle(jobTitle);
+		this.jobTitle = jobTitle;
 		return this;
 	}
-	public Entity build() { return this.entity; }
+	public Entity build() { 
+		Entity e = new Entity();
+		e.setFirstName(firstName);
+		e.setFullName(fullName);
+		e.setLastName(lastName);
+		e.setId(id);
+		e.setJobTitle(jobTitle);
+		return e;
+	}
 }
