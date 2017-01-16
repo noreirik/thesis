@@ -20,22 +20,16 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 		return sharesId || sharesFullName || (sharesFirstName && sharesLastName);
 	}
 	
-	// abc -> abc, abc def -> "abc def"
-	private String quote(String s) {
-		if (s.contains(" ") && !s.contains("\"")) return String.format("\"%s\"", s);
-		else return s;
-	}
-	
 	// abc, afd -> abc afd
 	// abc, afd eee -> abc "afd eee"
 	private String mergeStrings(String s1, String s2) {
 		StringBuilder sb = new StringBuilder();
 		
 		if (!s1.isEmpty()) {
-			sb.append(quote(s1));
+			sb.append(s1);
 		}
 		if (!s2.isEmpty() && !s2.equalsIgnoreCase(s1)) {
-			sb.append(quote(s2)); 
+			sb.append(s2); 
 		}
 		return sb.toString();
 	}
