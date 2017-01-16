@@ -17,6 +17,7 @@ public class EntityParser {
 	
 	private int idIdx, nameIdx, lastNameIdx, firstNameIdx,  jobTitleIdx;
 	
+	// TODO: Normalise entries
 	private List<Entity> retrieveRecords(List<String[]> records) {
 		List<Entity> entities = new ArrayList<Entity>();
 		
@@ -30,14 +31,29 @@ public class EntityParser {
 		return entities;
 	}
 	
+	private String quote(String s) {
+		if (s.contains(" ") && !s.contains("\"")) return String.format("\"%s\"", s);
+		else return s;
+	}
+	
 	private Entity createEntity(String[] record) {
 		String id, name, firstName, lastName, jobTitle;
 		id = name = firstName = lastName = jobTitle = "";
-		if (idIdx != -1) 		id = record[idIdx];
-		if (nameIdx != -1) 		name = record[nameIdx];
-		if (lastNameIdx != -1)	lastName = record[lastNameIdx];
-		if (firstNameIdx != -1) firstName = record[firstNameIdx];
-		if (jobTitleIdx != -1)	jobTitle = record[jobTitleIdx];
+		if (idIdx != -1) {
+			id = record[idIdx];
+		}
+		if (nameIdx != -1) {
+			name = quote(record[nameIdx]);
+		}
+		if (lastNameIdx != -1) {
+			lastName = quote(record[lastNameIdx]);
+		}
+		if (firstNameIdx != -1) {
+			firstName = quote(record[firstNameIdx]);
+		}
+		if (jobTitleIdx != -1) {
+			jobTitle = quote(record[jobTitleIdx]);
+		}
 		
 		return new	EntityBuilder()
 					.id(id)
