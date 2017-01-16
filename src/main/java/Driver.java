@@ -19,7 +19,7 @@ public class Driver {
 			}
 		}
 		
-		EntityResolver resolver = new EntityResolver();
+		EntityResolver resolver = new ProbabilisticEntityResolver();
 		List<Entity> resolvedEntities = resolver.resolve(entities);
 		
 		System.exit(0);
