@@ -3,7 +3,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Driver {
@@ -25,8 +28,9 @@ public class Driver {
 		
 		// Load gazetteers
 		GazetteerParser gazetteerParser = new GazetteerParser();
-		Set<String> firstNameGazetteer = gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-first-name-cp1252.csv");
-		Set<String> lastNameGazetteer = gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-last-name-cp1252.csv");
+		Map<String, HashSet<String>> gazetteers = new Hashtable<String,HashSet<String>>();
+		gazetteers.put("firstName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-first-name-cp1252.csv"));
+		gazetteers.put("lastName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-last-name-cp1252.csv"));
 		
 		EntityResolver resolver = new ProbabilisticEntityResolver();
 		List<Entity> resolvedEntities = resolver.resolve(entities);

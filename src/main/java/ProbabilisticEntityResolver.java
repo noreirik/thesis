@@ -1,7 +1,15 @@
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
 public class ProbabilisticEntityResolver implements EntityResolver {
+	
+	private Map<String,HashSet<String>> gazetteers;
+	
+	public ProbabilisticEntityResolver(Map<String,HashSet<String>> gazetteers) {
+		this.gazetteers = gazetteers;
+	}
 	
 	// 
 	private boolean match(Entity x, Entity y) {
