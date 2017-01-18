@@ -8,11 +8,23 @@ import com.opencsv.CSVReader;
 
 public class ERCSVReader {
 
+	Character separator, quoteChar;
+	
+	public ERCSVReader() {
+		separator = ','; // default to comma
+		quoteChar = '"'; // default to double quotes
+	}
+	
+	public ERCSVReader(Character separator, Character quoteChar) {
+		this.separator = separator;
+		this.quoteChar = quoteChar;
+	}
+	
 	public List<String[]> read(String filename) {
-
+		
 		List<String[]> records = new ArrayList<String[]>();
 		// tab is delimiter, double quotes as quote
-		try (CSVReader reader = new CSVReader(new FileReader(filename), '\t' , '"' )) {
+		try (CSVReader reader = new CSVReader(new FileReader(filename), separator , quoteChar )) {
 			String[] nextLine;
 			while ((nextLine = reader.readNext()) != null) {
 				if (nextLine != null) records.add(nextLine);
