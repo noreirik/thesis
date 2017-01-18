@@ -6,7 +6,7 @@ public class EntityParser {
 	private ERCSVReader reader;
 	
 	public EntityParser() {
-		reader = new ERCSVReader();
+		reader = new ERCSVReader('\t','"');
 	}
 	
 	public List<Entity> parse(String filename) {
