@@ -32,7 +32,7 @@ public class Driver {
 		gazetteers.put("firstName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-first-name-cp1252.csv"));
 		gazetteers.put("lastName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-last-name-cp1252.csv"));
 		
-		EntityResolver resolver = new ProbabilisticEntityResolver();
+		EntityResolver resolver = new ProbabilisticEntityResolver(gazetteers);
 		List<Entity> resolvedEntities = resolver.resolve(entities);
 		
 		// dump results to file
