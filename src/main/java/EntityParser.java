@@ -43,16 +43,16 @@ public class EntityParser {
 			id = record[idIdx];
 		}
 		if (nameIdx != -1) {
-			name = quote(record[nameIdx]);
+			name = record[nameIdx];
 		}
 		if (lastNameIdx != -1) {
-			lastName = quote(record[lastNameIdx]);
+			lastName = record[lastNameIdx];
 		}
 		if (firstNameIdx != -1) {
-			firstName = quote(record[firstNameIdx]);
+			firstName = record[firstNameIdx];
 		}
 		if (jobTitleIdx != -1) {
-			jobTitle = quote(record[jobTitleIdx]);
+			jobTitle = record[jobTitleIdx];
 		}
 		
 		return new	EntityBuilder()
