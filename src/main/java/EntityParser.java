@@ -56,11 +56,11 @@ public class EntityParser {
 		}
 		
 		return new	EntityBuilder()
-					.id(id)
-					.fullName(name)
-					.firstName(firstName)
-					.lastName(lastName)
-					.jobTitle(jobTitle)
+					.id(id.toLowerCase())
+					.fullName(name.toLowerCase())
+					.firstName(firstName.toLowerCase())
+					.lastName(lastName.toLowerCase())
+					.jobTitle(jobTitle.toLowerCase())
 					.build();
 	}
 	
