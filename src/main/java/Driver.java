@@ -14,7 +14,7 @@ public class Driver {
 	public static void main(String[] args) {
 		
 		String datadir; // Data set directory, TODO: Move to configuration file probably
-		datadir = args.length == 1 ? args[0] : "/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/workingset";
+		datadir = args.length == 1 ? args[0] : "/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/workingset";
 		File dir = new File(datadir);
 		
 		EntityParser entityParser = new EntityParser();
@@ -29,15 +29,15 @@ public class Driver {
 		// Load gazetteers
 		GazetteerParser gazetteerParser = new GazetteerParser();
 		Map<String, HashSet<String>> gazetteers = new Hashtable<String,HashSet<String>>();
-		gazetteers.put("firstName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-first-name-cp1252.csv"));
-		gazetteers.put("lastName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/gazetters/gazetteer-person-last-name-cp1252.csv"));
+		gazetteers.put("firstName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/gazetters/gazetteer-person-first-name-cp1252.csv"));
+		gazetteers.put("lastName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/gazetters/gazetteer-person-last-name-cp1252.csv"));
 		
 		EntityResolver resolver = new ProbabilisticEntityResolver(gazetteers);
 		List<Entity> resolvedEntities = resolver.resolve(entities);
 		
 		// dump results to file
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
-		EntityWriter writer = new PersonEntityWriter(String.format("/home/eirik/Dropbox/Universitetsarbeid/thesis/datasets/entities-PERSON-%s.lbat", timeStamp));
+		EntityWriter writer = new PersonEntityWriter(String.format("/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/entities-PERSON-%s.lbat", timeStamp));
 		writer.open();
 		for (Entity e : resolvedEntities) {
 			writer.write(e);
