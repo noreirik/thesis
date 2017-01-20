@@ -31,36 +31,35 @@ public class EntityParser {
 		return entities;
 	}
 	
-	private String quote(String s) {
-		if (s.contains(" ") && !s.contains("\"")) return String.format("\"%s\"", s);
-		else return s;
+	private String format(String s) {
+		return s.toLowerCase().trim();
 	}
 	
 	private Entity createEntity(String[] record) {
 		String id, name, firstName, lastName, jobTitle;
 		id = name = firstName = lastName = jobTitle = "";
 		if (idIdx != -1) {
-			id = record[idIdx];
+			id = format(record[idIdx]);
 		}
 		if (nameIdx != -1) {
-			name = record[nameIdx];
+			name = format(record[nameIdx]);
 		}
 		if (lastNameIdx != -1) {
-			lastName = record[lastNameIdx];
+			lastName = format(record[lastNameIdx]);
 		}
 		if (firstNameIdx != -1) {
-			firstName = record[firstNameIdx];
+			firstName = format(record[firstNameIdx]);
 		}
 		if (jobTitleIdx != -1) {
-			jobTitle = record[jobTitleIdx];
+			jobTitle = format(record[jobTitleIdx]);
 		}
 		
 		return new	EntityBuilder()
-					.id(id.toLowerCase())
-					.fullName(name.toLowerCase())
-					.firstName(firstName.toLowerCase())
-					.lastName(lastName.toLowerCase())
-					.jobTitle(jobTitle.toLowerCase())
+					.id(id)
+					.fullName(name)
+					.firstName(firstName)
+					.lastName(lastName)
+					.jobTitle(jobTitle)
 					.build();
 	}
 	
