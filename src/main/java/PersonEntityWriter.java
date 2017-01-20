@@ -1,3 +1,7 @@
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 public class PersonEntityWriter extends EntityWriter {
 		
 	public PersonEntityWriter(String fileName) {
@@ -8,6 +12,28 @@ public class PersonEntityWriter extends EntityWriter {
 	public void open() {
 		this.output.add("# Entities of type PERSON\n");
 		super.open();
+	}
+	
+	// an entity and the entities from which it was derived
+	private void write(Map.Entry<Entity,LinkedList<Entity>> entity) {
+		StringBuilder sb = new StringBuilder();
+		write(entity.getKey());
+		
+		if (!entity.getValue().isEmpty()) {
+			String mergedString = this.output.get(this.output.size()-1);
+			this.output.remove(mergedString);
+			sb.append(mergedString.substring(0, mergedString.length()-1)); // remove newline
+			sb.append(" FROM ");
+			
+			for (int i = 0; i < entity.getValue().size(); i++) {
+				sb.append(entity.getValue().toString());
+				if (i == entity.getValue().size()-1) ;
+				else sb.append(" AND ");
+			}
+			
+			sb.append("\n");
+			this.output.add(sb.toString());
+		}
 	}
 
 	@Override
@@ -44,5 +70,14 @@ public class PersonEntityWriter extends EntityWriter {
 		this.output.add("\n");
 		super.close();
 	}
+
+	@Override
+	public void write(Map<Entity, LinkedList<Entity>> entities) {
+		for (Map.Entry<Entity, LinkedList<Entity>> resolvedEntity : entities.entrySet()) {
+			write(resolvedEntity);
+		}
+	}
+	
+	
 	
 }

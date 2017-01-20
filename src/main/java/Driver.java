@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -33,16 +34,15 @@ public class Driver {
 		gazetteers.put("lastName", (HashSet<String>) gazetteerParser.parse("/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/gazetters/gazetteer-person-last-name-cp1252.csv"));
 		
 		EntityResolver resolver = new ProbabilisticEntityResolver(gazetteers);
-		List<Entity> resolvedEntities = resolver.resolve(entities);
+		Map<Entity, LinkedList<Entity>> resolvedEntities = resolver.resolve(entities);
 		
 		// dump results to file
 		String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(Calendar.getInstance().getTime());
 		EntityWriter writer = new PersonEntityWriter(String.format("/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/entities-PERSON-%s.lbat", timeStamp));
 		writer.open();
-		for (Entity e : resolvedEntities) {
-			writer.write(e);
-		}
+		writer.write(resolvedEntities);
 		writer.close();
+		System.out.println(resolvedEntities.entrySet().size());
 		
 		System.exit(0);
 	}
