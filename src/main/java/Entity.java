@@ -30,7 +30,7 @@ public class Entity {
 	public String getLastName() 	{ return lastName; }
 	public String getId() 			{ return id; }
 	public String getJobTitle()		{ return jobTitle; }
-	public boolean isMerged() 		{ return isMerged; }
+	public boolean isMerged() 		{ return isMerged; }
 	
 	@Override
 	public String toString() {
