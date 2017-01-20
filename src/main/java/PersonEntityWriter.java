@@ -26,7 +26,7 @@ public class PersonEntityWriter extends EntityWriter {
 			sb.append(" FROM ");
 			
 			for (int i = 0; i < entity.getValue().size(); i++) {
-				sb.append(entity.getValue().toString());
+				sb.append(entity.getValue().get(i).toString());
 				if (i == entity.getValue().size()-1) ;
 				else sb.append(" AND ");
 			}
