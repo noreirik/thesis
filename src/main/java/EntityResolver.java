@@ -1,7 +1,9 @@
 import java.util.List;
+import java.util.Map;
+import java.util.LinkedList;
 
 public interface EntityResolver {
 	
-	public List<Entity> resolve(List<Entity> entities);
+	public Map<Entity, LinkedList<Entity>> resolve(List<Entity> entities);
 	
 }
