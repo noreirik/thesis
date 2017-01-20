@@ -1,6 +1,7 @@
 public class EntityBuilder {
 	
 	private String fullName, firstName, lastName, id, jobTitle;
+	private boolean isMerged;
 	
 	public EntityBuilder() { }
 	public EntityBuilder fullName(String fullName)	{ 
@@ -23,6 +24,12 @@ public class EntityBuilder {
 		this.jobTitle = jobTitle;
 		return this;
 	}
+	public EntityBuilder isMerged(boolean isMerged) {
+		this.isMerged = isMerged;
+		return this;
+	}
+	
+	
 	public Entity build() { 
 		if (id == null) 		id = "";
 		if (fullName == null)	fullName = "";
@@ -30,6 +37,6 @@ public class EntityBuilder {
 		if (lastName == null)	lastName = "";
 		if (jobTitle == null)	jobTitle = "";
 		
-		return new Entity(id, fullName, firstName, lastName, jobTitle);
+		return new Entity(id, fullName, firstName, lastName, jobTitle, isMerged);
 	}
 }

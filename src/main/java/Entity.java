@@ -5,21 +5,24 @@ public class Entity {
 	private String lastName;
 	private String id;
 	private String jobTitle;
+	private boolean isMerged;
 	
 	public Entity(	String id, String fullName, String firstName,
-					String lastName, String jobTitle)
+					String lastName, String jobTitle, boolean isMerged)
 	{
 		this.id = id;
 		this.fullName = fullName;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.jobTitle = jobTitle;
+		this.isMerged = isMerged; 
 	}
 	
 	public void setFullName(String fullName)	{ this.fullName = fullName; 	}
 	public void setFirstName(String firstName)	{ this.firstName = firstName;	}
 	public void setLastName(String lastName)	{ this.lastName = lastName;		}
 	public void setId(String id)				{ this.id = id;					}
+	public void setMergedFlag(boolean isMerged)	{ this.isMerged = isMerged;		}
 	public void setJobTitle(String jobTitle)	{ this.jobTitle = jobTitle;		}
 
 	public String getFullName() 	{ return fullName; }
@@ -27,6 +30,7 @@ public class Entity {
 	public String getLastName() 	{ return lastName; }
 	public String getId() 			{ return id; }
 	public String getJobTitle()		{ return jobTitle; }
+	public boolean isMerged() 		{ return isMerged; }
 	
 	@Override
 	public String toString() {
