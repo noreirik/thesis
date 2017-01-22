@@ -2,11 +2,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /*
  * Format of CSV file is "UINTERESSANT,UINTERESSANT,Name"
  */
 public class GazetteerParser {
 
+	private static final Logger logger = LogManager.getLogger(GazetteerParser.class);
+	
 	private ERCSVReader reader;
 	
 	public GazetteerParser() {

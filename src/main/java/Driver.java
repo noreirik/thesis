@@ -8,9 +8,13 @@ import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
+
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 public class Driver {
+	
+	private static final Logger logger = LogManager.getLogger(Driver.class);
 	
 	public static void main(String[] args) {
 		
