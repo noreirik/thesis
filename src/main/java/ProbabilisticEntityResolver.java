@@ -107,14 +107,15 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 			} else { // merge x and y; remove x from d and y from er
 				Entity z = merge(x.getKey(), y.getKey());
 				z.setMergedFlag(true);
+				LinkedList<Entity> l = new LinkedList<Entity>();
 				
 				x_itr.remove();
 				y_itr.remove();
 				
 				if (x.getKey().isMerged()) {
-					d.put(z, x.getValue());
+					l.addAll(x.getValue());
+					d.put(z, l);
 				} else {
-					LinkedList<Entity> l = new LinkedList<Entity>();
 					l.add(x.getKey());
 					d.put(z, l);
 				}
