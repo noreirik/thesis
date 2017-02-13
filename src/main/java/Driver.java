@@ -18,9 +18,13 @@ public class Driver {
 	
 	public static void main(String[] args) {
 		
+		logger.info("Driver starting");
+		
 		String datadir; // Data set directory, TODO: Move to configuration file probably
 		datadir = args.length == 1 ? args[0] : "/home/eirik/Dropbox/Universitetsarbeid/Masteroppgave/datasets/workingset";
 		File dir = new File(datadir);
+		
+		logger.info("Dataset directory is {}", datadir);
 		
 		EntityParser entityParser = new EntityParser();
 		List<Entity> entities = new ArrayList<Entity>();
@@ -30,6 +34,8 @@ public class Driver {
 				entities.addAll(entityParser.parse(f.getAbsolutePath()));
 			}
 		}
+		
+		logger.info("NUMBER OF REFERENCES: {}", entities.size());
 		
 		// Load gazetteers
 		GazetteerParser gazetteerParser = new GazetteerParser();
@@ -46,7 +52,8 @@ public class Driver {
 		writer.open();
 		writer.write(resolvedEntities);
 		writer.close();
-		System.out.println(resolvedEntities.entrySet().size());
+		
+		logger.info("EQUIVALENT REFERENCES: {}", resolvedEntities.size());
 		
 		System.exit(0);
 	}

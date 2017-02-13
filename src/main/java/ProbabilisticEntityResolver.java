@@ -16,6 +16,7 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 
 	public ProbabilisticEntityResolver(Map<String,HashSet<String>> gazetteers) {
 		this.gazetteers = gazetteers;
+		logger.debug("ProbabilisticEntityResolver instantiated");
 	}
 
 	// 
@@ -23,6 +24,8 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 		if (x == null) return x == y;
 		if (y == null) return false;
 
+		logger.trace("Comparing {} and {}", x.toString(), y.toString());
+		
 		boolean sharesId =			!x.getId().isEmpty() &&
 				x.getId().toLowerCase().equals(y.getId().toLowerCase()); 
 		boolean sharesFullName =	!x.getFullName().isEmpty() &&
@@ -42,8 +45,20 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 				y.getFullName().toLowerCase().contains(x.getFirstName().toLowerCase()) &&
 				y.getFullName().toLowerCase().contains(x.getLastName().toLowerCase());
 
-		return	sharesId || sharesFullName || (sharesFirstName && sharesLastName) ||
-				firstNameAndLastNameInFullNameInX || firstNameAndLastNameInFullNameInY;
+		if (sharesId) logger.debug("Same id of {}\"", x.getId());
+		if (sharesFullName) logger.debug("Same name \"{}\"", x.getFullName());
+		if (sharesFirstName) logger.debug("Same first name of \"{}\"", x.getFirstName());
+		if (sharesLastName) logger.debug("Same last name of \"{}\"", x.getLastName());
+		if (firstNameAndLastNameInFullNameInX) logger.debug("\"{}\" and \"{}\" can be found in \"{}\"", y.getFirstName(), y.getLastName(), x.getFullName());
+		if (firstNameAndLastNameInFullNameInY) logger.debug("\"{}\" and \"{}\" can be found in \"{}\"", x.getFirstName(), x.getLastName(), y.getFullName());
+		
+		boolean isMatch =	sharesId || sharesFullName || (sharesFirstName && sharesLastName) ||
+								firstNameAndLastNameInFullNameInX || firstNameAndLastNameInFullNameInY; 
+		
+		if (isMatch) logger.debug("MATCH: {} and {}", x, y);
+		else logger.trace("NO MATCH: {} and {}", x, y);
+		
+		return isMatch;
 	}
 
 	// abc, afd -> abc afd
@@ -77,6 +92,9 @@ public class ProbabilisticEntityResolver implements EntityResolver {
 		z.firstName	( mergeStrings(	x.getFirstName(),	y.getFirstName	()	));
 		z.lastName	( mergeStrings(	x.getLastName(),	y.getLastName	()	));
 
+		Entity e = z.build();
+		logger.debug("MERGE: {} from {} and {}", e, x, y);
+		
 		return z.build();
 	}
 
