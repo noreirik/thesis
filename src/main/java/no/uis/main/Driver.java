@@ -1,3 +1,5 @@
+package no.uis.main;
+
 import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

@@ -1,3 +1,5 @@
+package no.uis.main;
+
 /*
  * Given two strings, return a number between 0 and 1 as a degree of similarity between the two strings,
  * where 1 means that the strings are identical  

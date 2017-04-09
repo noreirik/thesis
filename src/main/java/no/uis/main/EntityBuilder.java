@@ -1,3 +1,5 @@
+package no.uis.main;
+
 public class EntityBuilder {
 	
 	private String fullName, firstName, lastName, id, jobTitle;
